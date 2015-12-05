@@ -1,3 +1,4 @@
+package servletsAndFilters;
 
 
 import java.io.IOException;
@@ -13,21 +14,22 @@ import javax.servlet.http.HttpSession;
 
 import beansPackage.CourseBean;
 import beansPackage.DataStore;
+import beansPackage.UserBean;
 
 /**
- * Servlet implementation class DeleteCourse
+ * Servlet implementation class DeleteUser
  */
-@WebServlet("/DeleteCourse")
-public class DeleteCourse extends HttpServlet {
+@WebServlet("/DeleteUser")
+public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
+       
 	private DataStore dataStore;
 	
 	public void init(ServletConfig config) throws ServletException {
 		dataStore=new DataStore();
 	}
 	
-    public DeleteCourse() {
+    public DeleteUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,16 +45,18 @@ public class DeleteCourse extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String courseID = request.getParameter("Delete");
 		
-		if( courseID != null)
+		String userID = request.getParameter("DeleteUser");
+		
+		if( userID != null)
 		{
-			CourseBean course = dataStore.getCourse(courseID);
-			dataStore.deleteCourse(courseID , course);
+			System.out.println("[* INSIDE USER IF *]");
+			UserBean course = dataStore.getInfo(userID);
+			dataStore.deleteUser(userID , course);
 			HttpSession session = request.getSession();
-			session.removeAttribute("courses");
-			List<Object> courses = dataStore.getCourses();
-			session.setAttribute("courses", courses);
+			session.removeAttribute("users");
+			List<Object> users = dataStore.getUsers();
+			session.setAttribute("users", users);
 		}
 		
 		
