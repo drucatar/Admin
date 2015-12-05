@@ -1,0 +1,38 @@
+// main: ../style.scss
+
+// ==================================================
+// responsiveness for mobile phones
+// ==================================================
+@media screen and (max-width: 500px) {
+
+    // login and signup buttons
+    #home_login_button,
+    #home_signup_button{
+        display: block!important;
+        margin: 0 auto 20px auto!important;
+        box-sizing: border-box!important;
+        width: 90%!important;
+        max-width: 90px!important;
+    }
+
+    // login window
+    .home_form_window_input {
+        box-sizing: border-box!important;
+        max-width: 90%!important;
+    }
+
+    .home_form_window_send_button,
+    .home_form_window_cancel_button {
+        box-sizing: border-box!important;
+        margin: 0 auto!important;
+        max-width: 90%!important;
+    }
+
+    .home_form_window_send_button {
+        display: block!important;
+    }
+
+    .home_form_window_cancel_button {
+        margin-top: 20px!important;
+    }
+}

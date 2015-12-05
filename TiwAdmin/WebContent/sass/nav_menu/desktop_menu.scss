@@ -1,0 +1,67 @@
+// main: ../style.scss
+
+// ==================================================
+// desktop menu
+// ==================================================
+#desktop_menu {
+    display: block;
+    position: fixed;
+    height: 100%;
+    padding: 60px;
+    background-color: $black;
+    box-sizing: border-box;
+    right: 0;
+
+    z-index: 20;
+
+    -webkit-transform: translateX(150%);
+    -moz-transform: translateX(150%);
+    -ms-transform: translateX(150%);
+    transform: translateX(150%);
+
+    @include ease-in-out(0.3s);
+    @include material_shadow(2);
+
+    #close_desktop_menu {
+        display: block;
+        position: absolute;
+        right: 25px;
+        top: 25px;
+
+        img {
+            display: block;
+            width: 15px;
+        }
+    }
+
+    ul {
+        li {
+            display: block;
+            margin: 0 auto 30px auto;
+
+            a {
+                color: $dark_white;
+                letter-spacing: 2px;
+                border-bottom: 1px solid transparent;
+
+                @include ease-in-out(0.2s);
+
+                // &:hover {
+                //     border-color: $dark_white;
+                // }
+
+                img {
+                    display: inline-block;
+                    margin-right: 5px;
+                    width: 15px;
+                    vertical-align: middle;
+                }
+
+                span {
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}

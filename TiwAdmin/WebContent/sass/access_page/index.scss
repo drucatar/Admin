@@ -1,0 +1,107 @@
+// main: ../style.scss
+
+// ==================================================
+// home page (login)
+// ==================================================
+#home_main_screen {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: url(../img/access_page/background.jpg) no-repeat center center;
+    background-size: cover;
+
+    @include ease-in-out(0.3s);
+
+    &::before {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        content: "";
+        background-color: rgba(74, 55, 83, 0.7);
+    }
+
+    #home_info_container {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+
+        @include vertical-align;
+
+        #home_title {
+            display: block;
+            margin: 0 auto;
+            color: $white;
+            font-weight: 300;
+            letter-spacing: 4px;
+            max-width: 90%;
+        }
+
+        #home_description {
+            display: block;
+            color: $dark_white;
+            font-weight: 300;
+            margin: 10px auto 0 auto;
+            max-width: 90%;
+        }
+
+        #home_buttons_container {
+            display: block;
+            margin: 50px auto 0 auto;
+            max-width: 90%;
+
+            a {
+                display: inline-block;
+                padding: 7px 14px;
+                border: 2px solid $green;
+                text-transform: uppercase;
+                font-weight: 400;
+                vertical-align: middle;
+
+                @include ease-in-out(0.2s);
+            }
+
+            #home_login_button {
+                color: $green;
+                margin-right: 2%;
+
+                &:hover {
+                    background-color: $green;
+                    color: $dark_white;
+                }
+            }
+
+            #home_signup_button {
+                color: $dark_white;
+                background-color: $green;
+                margin-left: 2%;
+
+                span {
+                    display: block;
+                }
+
+                &:hover {
+                    background: $dark_green;
+                    border-color: $dark_green;
+                }
+            }
+        }
+    }
+}
+
+#home_dark_foreground {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+
+    @include ease-in-out(0.4s);
+}

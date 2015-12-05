@@ -1,0 +1,233 @@
+// main: ../style.scss
+
+// ==================================================
+// login screen
+// ==================================================
+.home_form_window {
+    display: block;
+    position: fixed;
+    margin: 0 auto;
+    height: auto;
+    width: 90%;
+    max-width: 630px;
+    max-height: 85%;
+    top: 50%;
+    left: 0;
+    right: 0;
+    background-color: $dark_white;
+    text-align: center;
+    z-index: 2;
+    overflow: hidden;
+
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: scale(0.8) translateY(-50%);
+    -moz-transform: scale(0.8) translateY(-50%);
+    -ms-transform: scale(0.8) translateY(-50%);
+    transform: scale(0.8) translateY(-50%);
+
+    @include ease-in-out(0.3s);
+    @include material_shadow(2);
+
+    ::-webkit-input-placeholder {
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    :-ms-input-placeholder {
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+        display: block;
+        font-weight: 200;
+        padding: 15px 0;
+        background-color: #628E93;
+        color: $dark_white;
+        // text-transform: uppercase;
+        letter-spacing: 4px;
+    }
+
+    form {
+        display: block;
+        margin: 0 auto;
+        padding: 50px 0;
+
+        input {
+            border: none;
+        }
+
+        .home_form_window_input_container {
+            display: block;
+            margin: 0 auto;
+            max-height: 40vh;
+            overflow-y: auto;
+
+            .home_form_window_input {
+                display: block;
+                padding: 12px 17px;
+                font-family: $first_font;
+                background-color: $dark_white;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                margin: 0 auto 25px auto;
+
+                @include ease-in-out(0.2s);
+
+                &:focus {
+                    border-color: $grey_blue;
+                    // border-width: 2px;
+                }
+            }
+        }
+
+        .home_form_window_form_buttons_container {
+            display: block;
+            margin: 50px auto 0 auto;
+            width: 90%;
+
+            .home_form_window_send_button,
+            .home_form_window_cancel_button {
+                display: inline-block;
+                cursor: pointer;
+                padding: 7px 14px;
+                text-transform: uppercase;
+                // color: $dark_white;
+                font-weight: 400;
+                background-color: transparent;
+                vertical-align: middle;
+
+                @include ease-in-out(0.2s);
+            }
+        }
+
+        .home_form_window_send_button {
+            // background-color: $green;
+            border: 2px solid $green;
+            color: $green;
+            margin-right: 2%;
+            font-family: $first_font;
+
+            &:hover {
+                background-color: $green;
+                color: $dark_white;
+            }
+        }
+
+        .home_form_window_cancel_button {
+            border: 2px solid $red;
+            color: $red;
+            margin-left: 2%;
+
+            &:hover {
+                background-color: $red;
+                color: $dark_white;
+            }
+        }
+    }
+}
+
+
+#home_signup_window {
+
+    form {
+
+        .home_form_window_input_container {
+
+            .home_form_window_input {
+                display: inline-block;
+                margin: 20px;
+            }
+
+            #home_signup_window_select_category_container,
+            #home_signup_window_select_interests_container {
+                display: block;
+                margin: 0 auto;
+                padding-bottom: 30px;
+
+                h2 {
+                    padding-bottom: 25px;
+                    font-weight: 200!important;
+                }
+
+                div {
+                    display: inline-block;
+                    margin: 0 2%;
+                }
+            }
+
+            #home_signup_window_select_interests_container {
+                padding-top: 30px!important;
+            }
+        }
+
+        .custom_input_container {
+            display: inline-block;
+
+            .custom_input {
+                display: none;
+
+                &:checked + label::before {
+                    background-color: $grey_blue;
+                }
+            }
+
+            label {
+                position: relative;
+                cursor: pointer;
+                padding-left: 25px;
+                vertical-align: middle;
+
+                -webkit-touch-callout: none;
+               -webkit-user-select: none;
+               -khtml-user-select: none;
+               -moz-user-select: none;
+               -ms-user-select: none;
+               user-select: none;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    height: 16px;
+                    width: 16px;
+                    margin-right: 10px;
+                    left: 0;
+                    bottom: 1px;
+                    background-color: rgba(0, 0, 0, 0.2);
+
+                    @include ease-in-out(0.2s);
+                }
+            }
+
+            input[type=radio] + label::before {
+                @include border-radius(50%);
+            }
+        }
+
+        #signup_form_description_input {
+            display: block;
+            padding: 12px 17px;
+            font-family: $first_font;
+            background-color: $dark_white;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            margin: 25px auto 25px auto;
+            resize: none;
+
+            @include ease-in-out(0.2s);
+
+            &:focus {
+                border-color: $grey_blue;
+                // border-width: 2px;
+            }
+        }
+    }
+}

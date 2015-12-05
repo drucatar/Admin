@@ -1,0 +1,83 @@
+// main: ../style.scss
+
+// ==================================================
+// delete course window
+// ==================================================
+#delete_course_window {
+    display: block;
+    position: fixed;
+    margin: 0 auto;
+    height: auto;
+    width: 90%;
+    max-width: 430px;
+    max-height: 85%;
+    top: 50%;
+    left: 0;
+    right: 0;
+    background-color: $dark_white;
+    text-align: center;
+    z-index: 30;
+    overflow: hidden;
+
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: scale(0.8) translateY(-50%);
+    -moz-transform: scale(0.8) translateY(-50%);
+    -ms-transform: scale(0.8) translateY(-50%);
+    transform: scale(0.8) translateY(-50%);
+
+    @include ease-in-out(0.3s);
+    @include material_shadow(2);
+
+    h1 {
+        display: block;
+        font-weight: 200;
+        padding: 15px 0;
+        background-color: #628E93;
+        color: $dark_white;
+        // text-transform: uppercase;
+        letter-spacing: 4px;
+    }
+
+    div {
+        padding: 80px 0;
+
+        #accept_delete_course_button,
+        #cancel_delete_course_button {
+            display: inline-block;
+            cursor: pointer;
+            padding: 7px 14px;
+            text-transform: uppercase;
+            // color: $dark_white;
+            font-weight: 400;
+            background-color: transparent;
+            vertical-align: middle;
+
+            @include ease-in-out(0.2s);
+        }
+
+        #accept_delete_course_button {
+            // background-color: $green;
+            border: 2px solid $green;
+            color: $green;
+            margin-right: 2%;
+            font-family: $first_font;
+
+            &:hover {
+                background-color: $green;
+                color: $dark_white;
+            }
+        }
+
+        #cancel_delete_course_button {
+            border: 2px solid $red;
+            color: $red;
+            margin-left: 2%;
+
+            &:hover {
+                background-color: $red;
+                color: $dark_white;
+            }
+        }
+    }
+}

@@ -1,0 +1,89 @@
+// main: ../style.scss
+
+// ==================================================
+// desktop nav
+// ==================================================
+.desktop_nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 14px 0;
+    background-color: $grey_blue;
+    width: 100%;
+    z-index: 10;
+
+    .desktop_nav_logo {
+        display: inline-block;
+        position: relative;
+        margin: 0 auto;
+        color: $dark_white;
+        font-weight: 400;
+        text-align: center;
+        letter-spacing: 4px;
+        font-size: 16px;
+        left: 25px;
+    }
+
+    .desktop_nav_buttons_container {
+        display: inline-block;
+        position: absolute!important;
+        right: 0;
+
+        @include vertical-align;
+
+        .desktop_nav_search_form {
+            display: inline-block;
+            vertical-align: middle;
+            z-index: 11;
+
+            // border-top-left-radius: 25px;
+            // border-bottom-left-radius: 25px;
+            // @include border-radius(25px);
+
+            #desktop_nav_search_input {
+                display: inline-block;
+                padding: 5px 10px;
+                outline: none!important;
+                border: none;
+                border-radius: 0!important;
+                font-family: $first_font;
+                font-size: 14px;
+                background-color: $dark_white;
+                color: $black;
+                font-weight: 200;
+                visibility: hidden;
+                opacity: 0;
+
+                // -webkit-transform: translateX(20px);
+                // -moz-transform: translateX(20px);
+                // -ms-transform: translateX(20px);
+                // transform: translateX(20px);
+
+                @include ease-in-out(0.2s);
+            }
+
+            a {
+                display: inline-block;
+                vertical-align: middle;
+                padding: 0 5px 0 7px;
+
+                img {
+                    display: block;
+                    width: 15px;
+                }
+            }
+        }
+
+        .desktop_nav_open_menu {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 25px;
+
+            img {
+                display: block;
+                width: 17px;
+            }
+        }
+    }
+}

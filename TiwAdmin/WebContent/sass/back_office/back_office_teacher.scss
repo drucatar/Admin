@@ -1,0 +1,188 @@
+// main: ../style.scss
+
+// ==================================================
+// teacher back office
+// ==================================================
+.back_office_teacher_wrapper,
+.admin_wrapper {
+    padding-bottom: 0;
+
+    // user info section
+    .back_office_section_user_info {
+        padding-top: 50px;
+
+        .back_office_user_image {
+            display: inline-block;
+            height: 15vw;
+            width: 15vw;
+            min-height: 100px;
+            min-width: 100px;
+            max-height: 170px;
+            max-width: 170px;
+            background-color: $red;
+            // background-image: url(../img/profile/user.svg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-right: 50px;
+            vertical-align: middle;
+
+            @include border-radius(50%);
+            @include material_shadow(1);
+        }
+
+        .back_office_user_data {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+
+            span {
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .back_office_user_data_name {
+                color: $black;
+            }
+
+            .back_office_user_data_age {
+                color: $grey;
+            }
+        }
+    }
+
+    // uploaded courses
+    .back_office_section_uploaded_courses {
+        background-color: $black;
+        overflow: hidden;
+
+        .section_title {
+            color: $dark_white;
+            margin-bottom: 0;
+        }
+
+        .back_office_new_course_button {
+            display: inline-block;
+            margin: 20px auto 80px auto;
+            padding: 7px 14px;
+            border: 2px solid $dark_red;
+            color: $dark_red;
+            text-transform: uppercase;
+            font-weight: 400;
+
+            @include border-radius(25px);
+            @include ease-in-out(0.2s);
+
+            &:hover {
+                background-color: $dark_red;
+                color: $dark_white;
+            }
+        }
+
+        .back_office_uploaded_courses_list {
+            display: block;
+            width: 90%;
+            max-width: 960px;
+            margin: 0 auto;
+
+            li {
+                display: inline-block;
+                position: relative;
+                float: left;
+                height: 180px;
+                width: 30%;
+                margin: 0 1.65% 4% 1.65%;
+                background: $grey;
+
+                @include material_shadow(2);
+                @include ease-in-out(0.2s);
+
+                &:hover {
+                    transform: scale(1.02);
+                }
+
+                .delete_course_button {
+                    display: inline-block;
+                    position: absolute;
+                    right: 15px;
+                    top: 15px;
+                    background-color: $dark_red;
+                    padding: 5px;
+                    z-index: 3;
+
+                    img {
+                        display: block;
+                        width: 15px;
+                    }
+                }
+
+                a:not(.delete_course_button) {
+                    display: block;
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+
+                    span {
+                        display: block;
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        padding: 8px 0;
+                        color: $dark_white;
+                        background-color: $red;
+                    }
+                }
+            }
+        }
+    }
+
+    // not validated courses
+    .back_office_section_not_validated_courses {
+        overflow: hidden;
+
+        .back_office_not_validated_courses_list {
+            display: block;
+            width: 90%;
+            max-width: 960px;
+            margin: 0 auto;
+
+            li {
+                display: inline-block;
+                position: relative;
+                float: left;
+                height: 180px;
+                width: 30%;
+                margin: 0 1.65% 4% 1.65%;
+                background: $grey;
+
+                @include material_shadow(2);
+                @include ease-in-out(0.2s);
+
+                &:hover {
+                    transform: scale(1.02);
+                }
+
+                a {
+                    display: block;
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+
+                    span {
+                        display: block;
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        padding: 8px 0;
+                        color: $dark_white;
+                        background-color: $black;
+                    }
+                }
+            }
+        }
+    }
+}

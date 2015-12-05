@@ -1,0 +1,44 @@
+// main: ../style.scss
+
+// ==================================================
+// login / signup
+// ==================================================
+.show_home_dark_foreground,
+.show_back_office_dark_foreground {
+    visibility: visible!important;
+    opacity: 1!important;
+}
+
+.show_home_form_window,
+.show_new_course_window,
+.show_delete_course_window {
+    visibility: visible!important;
+    opacity: 1!important;
+    -webkit-transform: scale(1) translateY(-50%)!important;
+    -moz-transform: scale(1) translateY(-50%)!important;
+    -ms-transform: scale(1) translateY(-50%)!important;
+    transform: scale(1) translateY(-50%)!important;
+}
+
+
+
+
+// ==================================================
+// menu and nav
+// ==================================================
+.show_search_input {
+    visibility: visible!important;
+    opacity: 1!important;
+
+    // -webkit-transform: translateX(0)!important;
+    // -moz-transform: translateX(0)!important;
+    // -ms-transform: translateX(0)!important;
+    // transform: translateX(0)!important;
+}
+
+.show_desktop_menu {
+    -webkit-transform: translateX(0)!important;
+    -moz-transform: translateX(0)!important;
+    -ms-transform: translateX(0)!important;
+    transform: translateX(0)!important;
+}

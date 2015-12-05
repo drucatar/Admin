@@ -1,0 +1,47 @@
+// main: ../style.scss
+
+// ==================================================
+// profile user info section
+// ==================================================
+.profile_section_user_info {
+    padding-top: 50px;
+
+    .profile_user_image {
+        display: inline-block;
+        height: 15vw;
+        width: 15vw;
+        min-height: 100px;
+        min-width: 100px;
+        max-height: 170px;
+        max-width: 170px;
+        background-color: $red;
+        // background-image: url(../img/profile/user.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 50px;
+        vertical-align: middle;
+
+        @include border-radius(50%);
+        @include material_shadow(1);
+    }
+
+    .profile_user_data {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+
+        span {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .profile_user_data_name {
+            color: $black;
+        }
+
+        .profile_user_data_age {
+            color: $grey;
+        }
+    }
+}

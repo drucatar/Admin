@@ -1,0 +1,49 @@
+// main: ../style.scss
+
+// ==================================================
+// admin users table
+// ==================================================
+.admin_users_section {
+    background-color: $light_grey;
+
+    .admin_table_container {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        width: 90%;
+        max-width: 282px;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        table {
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+
+            a {
+                color: $grey_blue;
+                text-decoration: underline;
+            }
+
+            td, th {
+                padding: 12px 14px;
+            }
+
+            th {
+                background-color: $green;
+            }
+
+            td {
+                background-color: $dark_white;
+            }
+
+            .delete_user {
+                a {
+                    color: $red;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

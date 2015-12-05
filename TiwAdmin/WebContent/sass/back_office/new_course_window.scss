@@ -1,0 +1,257 @@
+// main: ../style.scss
+
+// ==================================================
+// new course window
+// ==================================================
+#new_course_window {
+    display: block;
+    position: fixed;
+    margin: 0 auto;
+    height: auto;
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 0;
+    right: 0;
+    background-color: $dark_white;
+    text-align: center;
+    z-index: 30;
+    overflow: hidden;
+
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: scale(0.8) translateY(-50%);
+    -moz-transform: scale(0.8) translateY(-50%);
+    -ms-transform: scale(0.8) translateY(-50%);
+    transform: scale(0.8) translateY(-50%);
+
+    @include ease-in-out(0.3s);
+    @include material_shadow(2);
+
+    ::-webkit-input-placeholder {
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    :-ms-input-placeholder {
+       color: rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+        display: block;
+        font-weight: 200;
+        padding: 15px 0;
+        background-color: #628E93;
+        color: $dark_white;
+        // text-transform: uppercase;
+        letter-spacing: 4px;
+    }
+
+    form {
+        display: block;
+        margin: 0 auto;
+        padding: 50px 0;
+
+        input {
+            border: none;
+        }
+
+        // inputs
+        .back_office_new_course_form_input_container {
+            display: block;
+            margin: 0 auto;
+            max-height: 50vh;
+            width: 80%;
+            overflow-y: auto;
+
+            .back_office_new_course_form_section {
+                display: block;
+                margin: 0 auto 40px auto;
+
+                .back_office_new_course_form_section_title {
+                    display: block;
+                    text-align: center;
+                    margin: 0 auto 30px auto;
+                    font-weight: 200;
+                }
+
+                .back_office_new_course_form_input {
+                    display: inline-block;
+                    padding: 12px 17px;
+                    font-family: $first_font;
+                    background-color: $dark_white;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                    margin: 25px;
+                    box-sizing: border-box;
+                    width: 90%;
+                    max-width: 300px;
+                    @include ease-in-out(0.2s);
+
+                    &:focus {
+                        border-color: $grey_blue;
+                        // border-width: 2px;
+                    }
+                }
+
+                // file input
+                .file_input_container {
+                    display: block;
+                    margin: 20px auto 0 auto;
+
+                    .file_input,
+                    .course_image_file_input {
+                        width: 0.1px;
+                    	height: 0.1px;
+                    	opacity: 0;
+                    	overflow: hidden;
+                    	position: absolute;
+                    	z-index: -1;
+                    }
+
+                    label {
+                        display: inline-block;
+                        padding: 7px 14px;
+                        border: 2px solid $grey_blue;
+                        color: $grey_blue;
+                        font-weight: 400;
+                        cursor: pointer;
+
+                        @include ease-in-out(0.2s);
+
+                        &:not(#course_image_container span):hover {
+                            background-color: $grey_blue;
+                            color: $dark_white;
+                        }
+                    }
+                }
+
+                // course image
+                #course_image_container {
+                    display: block;
+                    position: relative;
+                    margin: 20px auto;
+                    height: 100px;
+                    width: 100px;
+                    box-sizing: border-box;
+                    border: 2px solid $grey_blue;
+                    cursor: pointer;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+
+                    @include ease-in-out(0.2s);
+
+                    &:hover {
+                        background-color: $grey_blue;
+
+                        label {
+                            span {
+                                color: $dark_white;
+                            }
+                        }
+                    }
+
+                    label {
+                        display: block;
+                        border: none;
+                        padding: 0;
+                        height: 100%;
+                        width: 100%;
+
+                        span {
+                            display: block;
+                            @include vertical-align;
+                        }
+                    }
+                }
+
+                // add chapter button
+                .add_chapter_button {
+                    display: inline-block;
+                    margin: 30px auto 0 auto;
+                    padding: 5px 10px;
+                    border: 2px solid $dark_red;
+                    color: $dark_red;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    font-size: 12px;
+
+                    @include border-radius(25px);
+                    @include ease-in-out(0.2s);
+
+                    &:hover {
+                        background-color: $dark_red;
+                        color: $dark_white;
+                    }
+                }
+            }
+        }
+
+        // buttons
+        .back_office_new_course_form_buttons_container {
+            display: block;
+            margin: 50px auto 0 auto;
+            width: 90%;
+
+            .back_office_new_course_form_send_button,
+            .back_office_new_course_form_cancel_button {
+                display: inline-block;
+                cursor: pointer;
+                padding: 7px 14px;
+                text-transform: uppercase;
+                // color: $dark_white;
+                font-weight: 400;
+                background-color: transparent;
+                vertical-align: middle;
+
+                @include ease-in-out(0.2s);
+            }
+        }
+
+        .back_office_new_course_form_send_button {
+            // background-color: $green;
+            border: 2px solid $green;
+            color: $green;
+            margin-right: 2%;
+            font-family: $first_font;
+
+            &:hover {
+                background-color: $green;
+                color: $dark_white;
+            }
+        }
+
+        .back_office_new_course_form_cancel_button {
+            border: 2px solid $red;
+            color: $red;
+            margin-left: 2%;
+
+            &:hover {
+                background-color: $red;
+                color: $dark_white;
+            }
+        }
+    }
+}
+
+#back_office_dark_foreground {
+    display: block;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 29;
+
+    @include ease-in-out(0.4s);
+}

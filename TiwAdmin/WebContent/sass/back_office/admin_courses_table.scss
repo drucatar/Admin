@@ -1,0 +1,61 @@
+// main: ../style.scss
+
+// ==================================================
+// admin courses table
+// ==================================================
+.admin_courses_section {
+
+    .admin_table_container {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        width: 90%;
+        max-width: 800px;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        table {
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+
+            a {
+                color: $grey_blue;
+                text-decoration: underline;
+            }
+
+            td, th {
+                padding: 12px 14px;
+            }
+
+            th {
+                background-color: $green;
+            }
+
+            // tr {
+            //     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            //     border-right: 1px solid rgba(0, 0, 0, 0.1);
+            //     border-left: 1px solid rgba(0, 0, 0, 0.1);
+            // }
+
+            td {
+                background-color: $light_grey;
+            }
+
+            .not_validated_course {
+                a {
+                    color: $dark_green;
+                    text-decoration: none;
+                }
+            }
+
+            .delete_course {
+                a {
+                    color: $red;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

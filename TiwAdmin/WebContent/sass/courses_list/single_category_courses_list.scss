@@ -1,0 +1,48 @@
+// main: ../style.scss
+
+// ==================================================
+// single category course list
+// ==================================================
+.single_category_course_list_wrapper {
+
+    section {
+        padding-bottom: 0;
+
+        .single_category_courses_list {
+            display: block;
+            margin: 0 auto;
+
+            li {
+                display: inline-block;
+                position: relative;
+                width: 22vw;
+                height: 22vw;
+                max-width: 200px;
+                max-height: 200px;
+                min-width: 120px;
+                min-height: 120px;
+                margin: 0 1.3vw 3vw 1.3vw;
+                vertical-align: middle;
+                background-color: $grey;
+
+                @include material_shadow(1);
+
+                a {
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+
+                    .course_list_course_title {
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        bottom: 0;
+                        padding: 8px 0;
+                        background-color: $dark_red;
+                        color: $dark_white;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+// compileCompressed: ../css/style.css
+
+// ==================================================
+// final css (will compile into style.css)
+// ==================================================
+
+// global
+@import "global/standard";
+@import "global/classes";
+@import "global/main_wrapper";
+@import "global/footer";
+
+
+// error page
+@import "error_page/error_page";
+
+
+// nav and menu
+@import "nav_menu/desktop_nav";
+@import "nav_menu/desktop_menu";
+
+
+// access page
+@import "access_page/index";
+@import "access_page/home_form_window";
+@import "access_page/responsive_mobile";
+
+
+// courses list
+@import "courses_list/global_courses_list";
+@import "courses_list/single_category_courses_list";
+
+
+// public profile
+@import "profile/section_user_info";
+@import "profile/student/section_enrolled_courses";
+@import "profile/teacher/section_uploaded_courses";
+
+
+// back office
+@import "back_office/back_office_teacher";
+@import "back_office/new_course_window";
+@import "back_office/delete_course_window";
+@import "back_office/admin_courses_table";
+@import "back_office/admin_users_table";

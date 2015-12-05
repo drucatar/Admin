@@ -1,0 +1,74 @@
+// main: ../style.scss
+
+// ==================================================
+// global course list
+// ==================================================
+.course_list_wrapper {
+    padding-bottom: 0;
+
+    section {
+
+        &:nth-child(odd) {
+            background-color: $light_grey;
+        }
+
+        .section_title {
+            margin-bottom: 0;
+        }
+
+        .view_more_courses_button {
+            display: inline-block;
+            margin: 20px auto 80px auto;
+            padding: 7px 14px;
+            border: 1px solid $dark_red;
+            color: $dark_red;
+            text-transform: uppercase;
+            // font-weight: 600;
+
+            @include border-radius(25px);
+            @include ease-in-out(0.2s);
+
+            &:hover {
+                background-color: $dark_red;
+                color: $dark_white;
+            }
+        }
+
+        .last_courses_list {
+            display: block;
+            margin: 0 auto;
+
+            li {
+                display: inline-block;
+                position: relative;
+                width: 22vw;
+                height: 22vw;
+                max-width: 200px;
+                max-height: 200px;
+                min-width: 120px;
+                min-height: 120px;
+                margin: 0 1.3vw 2vw 1.3vw;
+                vertical-align: middle;
+                background-color: $grey;
+
+                @include material_shadow(1);
+
+                a {
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+
+                    .course_list_course_title {
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        bottom: 0;
+                        padding: 8px 0;
+                        background-color: $dark_red;
+                        color: $dark_white;
+                    }
+                }
+            }
+        }
+    }
+}

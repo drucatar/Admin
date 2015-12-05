@@ -1,0 +1,54 @@
+// main: ../../style.scss
+
+// ==================================================
+// uploaed courses list in teachers back office
+// ==================================================
+.profile_section_uploaded_courses {
+    background-color: $black;
+    overflow: hidden;
+
+    .section_title {
+        color: $dark_white;
+    }
+
+    .profile_uploaded_courses_list {
+        display: block;
+        width: 90%;
+        max-width: 960px;
+        margin: 0 auto;
+
+        li {
+            display: inline-block;
+            position: relative;
+            float: left;
+            height: 180px;
+            width: 30%;
+            margin: 0 1.65% 4% 1.65%;
+            background: $grey;
+
+            @include material_shadow(2);
+
+            @include ease-in-out(0.2s);
+
+            &:hover {
+                transform: scale(1.02);
+            }
+
+            a {
+                display: block;
+                height: 100%;
+                width: 100%;
+
+                span {
+                    display: block;
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    padding: 8px 0;
+                    color: $dark_white;
+                    background-color: $red;
+                }
+            }
+        }
+    }
+}
