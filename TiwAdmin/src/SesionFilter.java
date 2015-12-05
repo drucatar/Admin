@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class SesionFilter
  */
-@WebFilter(filterName = "SessionFilter", urlPatterns={"/back_office_admin.jsp" , "/access_page.jsp"})
+@WebFilter(filterName = "SessionFilter", urlPatterns={"/BackOfficeAdmin.jsp" , "/AccessPage.jsp"})
 public class SesionFilter implements Filter {
 
     /**
@@ -42,9 +42,9 @@ public class SesionFilter implements Filter {
 		HttpSession session = req.getSession();
 		
 		if(session.getAttribute("validated_bean_session") == null)
-			request.getRequestDispatcher("access_page.jsp").forward(request, response);
+			request.getRequestDispatcher("AccessPage.jsp").forward(request, response);
 		else
-			request.getRequestDispatcher("back_office_admin.jsp").forward(request, response);
+			request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
 
 	}
 

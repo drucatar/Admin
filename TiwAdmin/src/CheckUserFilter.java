@@ -49,8 +49,8 @@ public class CheckUserFilter implements Filter {
 			if(bean.getPassword().equals(request.getParameter("password")))
 				chain.doFilter(request, response);
 			else
-				((HttpServletResponse) response).sendRedirect("incorrect_password.html");
+				((HttpServletResponse) response).sendRedirect("IncorrectPassword.jsp");
 		else
-			((HttpServletResponse) response).sendRedirect("incorrect_user.html");
+			((HttpServletResponse) response).sendRedirect("IncorrectUser.jsp");
 	}
 }

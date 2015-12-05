@@ -54,7 +54,7 @@ public class RedirectAfterLogin extends HttpServlet {
 		session.setAttribute("courses", courses);
 		session.setAttribute("users", users);
 		
-		request.getRequestDispatcher("back_office_admin.jsp").forward(request, response);
+		request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
 	}
 
 }

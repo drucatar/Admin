@@ -52,7 +52,7 @@ public class ValidateCourse extends HttpServlet {
 		dataStore.aprooveCourse(courseID, oldCourse, newCourse);
 	}
 	
-	request.getRequestDispatcher("back_office_admin.jsp").forward(request, response);
+	request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
 	}
 
 }

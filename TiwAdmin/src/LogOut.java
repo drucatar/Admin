@@ -39,7 +39,7 @@ public class LogOut extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		session.invalidate();
-		((HttpServletResponse) response).sendRedirect("access_page.jsp");
+		((HttpServletResponse) response).sendRedirect("AccessPage.jsp");
 	}
 
 	/**
