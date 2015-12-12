@@ -56,11 +56,11 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
         <!-- ================================================== -->
         <div id="home_dark_foreground"></div>
 
-        <div class="home_form_window" id="home_login_window">
+        <div class="prompt_window" id="home_login_window">
 
             <h1>Login</h1>
 
-            <form id="login_form" action="RedirectAfterLogin" method = "post">
+            <form autocomplete="off" id="login_form" action="RedirectAfterLogin" method = "post">
 
                 <div class="home_form_window_input_container">
 
@@ -70,8 +70,8 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
                 <div class="home_form_window_form_buttons_container" id="home_login_form_buttons_container">
 
-                    <input class="home_form_window_send_button" id="home_login_send_button" type="submit" value="Enter">
-                    <a class="home_form_window_cancel_button" id="home_login_cancel_button" href="#!">Cancel</a>
+                    <input class="prompt_window_send_button" id="home_login_send_button" type="submit" value="Enter">
+                    <a class="prompt_window_cancel_button" id="home_login_cancel_button" href="#!">Cancel</a>
                 </div>
             </form>
         </div>
