@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="beansPackage.*, beansPackage.CourseBean, beansPackage.DataStore, java.util.*"%>
+<%@page import="java.util.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
    <%session = request.getSession();
-   AdminBean bean = ((AdminBean) session.getAttribute("validated_bean_session"));%>
+   entities.Admin admin = (entities.Admin) session.getAttribute("validated_session");%>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -88,7 +88,7 @@
         <!-- main wrapper -->
         <!-- ================================================== -->
        <%
-       	List<Object> courses = (List<Object>) session.getAttribute("courses");
+       	List<entities.Course> courses = (List<entities.Course>) session.getAttribute("courses");
 		%>
        
         <div class="main_wrapper admin_wrapper">
@@ -121,27 +121,27 @@
                         <!-- table body -->
                         <tbody>
                       <%  
-                         for (Object course:courses){
+                         for (entities.Course course:courses){
                       %>
                             <tr>
-                                <td><a href="#!"><%=((CourseBean)course).getTitle()%></a></td>
-                                <td><a href="#!"><%=((CourseBean)course).getSyllabus()%></a></td>
-                                <td><a href="#!"><%=((CourseBean)course).getProfessorID()%></a></td>
-                                <td><%=((CourseBean)course).getDuration()%></td>
-                                <td><%=((CourseBean)course).getPrice()%></td>
-                                <%if(((CourseBean)course).isValidated()){%>
+                                <td><a href="#!"><%=course.getTitle()%></a></td>
+                                <td><a href="#!"><%=course.getSyllabus()%></a></td>
+                                <td><a href="#!"><%=course.getProfessor()%></a></td>
+                                <td><%=course.getDuration()%></td>
+                                <td><%=course.getPrice()%></td>
+                                <%if(course.getValidated() == 1){%>
                                 	<td> Yes</td>
                                 <%} else {%>
                                 	<td class="not_validated_course">
 	                                    <form action="ValidateCourse" method = "post">
-	                                        <input type="hidden" name="Validate" value="<%=((CourseBean)course).getID()%>">
+	                                        <input type="hidden" name="Validate" value="<%=course.getIdCourse()%>">
 	                                        <input class="validate_course_button" type="submit" value="Validate">
 	                                    </form>
                                     </td>
                                 <%}%>
                                   <td class="delete_course">
                                     <form  action="DeleteCourse"  method = "post">
-                                        <input type="hidden" name ="Delete" value="<%=((CourseBean)course).getID()%>">
+                                        <input type="hidden" name ="Delete" value="<%=course.getIdCourse()%>">
                                         <input class="delete_course_button" type="submit" value="Delete">
                                     </form>
                                 </td>
@@ -159,7 +159,8 @@
 
 
 		<%
-       		List<Object> users = (List<Object>) session.getAttribute("users");
+       		List<entities.Student> students = (List<entities.Student>) session.getAttribute("students");
+			List<entities.Teacher> teachers = (List<entities.Teacher>) session.getAttribute("teachers");
 		%>
 
 
@@ -185,18 +186,33 @@
                         <!-- table body -->
                         <tbod>                    
                          	<%  
-                         		for (Object user:users){
+                         		for (entities.Teacher teacher:teachers){
                      		 %>
                             <tr>
-                                <td><a href="#!"><%=((UserBean) user).getName()%></a></td>
-                                <%if(((UserBean) user).getCategory() == '1'){%>
-                               		<td>Teacher</td>
-                                 <%} else {%>
-                                 	<td>Student</td>
-                                 	<%}%>
+                                <td><a href="#!"><%=teacher.getNameTeacher()%></a></td>
+                               	<td>Teacher</td>
                                 <td class="delete_user">
                                      <form action="DeleteUser" method = "post">
-										<input type="hidden" name ="DeleteUser" value="<%=((UserBean) user).getNickname()%>">                                      
+										<input type="hidden" name ="DeleteUser" value="<%=teacher.getNickname()%>">
+										<input type="hidden" name ="UserType" value="1">                                       
+                                    	<input class="delete_user_button" type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+							<%
+	                			}
+	               			%>
+	               			
+	               			<%  
+                         		for (entities.Student student:students){
+                     		 %>
+                            <tr>
+                                <td><a href="#!"><%=student.getNameStudent()%></a></td>
+                               	<td>Student</td>
+                                <td class="delete_user">
+                                     <form action="DeleteUser" method = "post">
+										<input type="hidden" name ="DeleteUser" value="<%=student.getNickname()%>">
+										<input type="hidden" name ="UserType" value="0">                                  
                                     	<input class="delete_user_button" type="submit" value="Delete">
                                     </form>
                                 </td>
