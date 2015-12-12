@@ -3,15 +3,16 @@ package servletsAndFilters;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beansPackage.CourseBean;
-import beansPackage.DataStore;
 
 /**
  * Servlet implementation class ValidateCourse
@@ -20,8 +21,6 @@ import beansPackage.DataStore;
 public class ValidateCourse extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-       
-	private DataStore dataStore;
 	
     public ValidateCourse() {
         super();
@@ -29,7 +28,6 @@ public class ValidateCourse extends HttpServlet {
     }
 
 	public void init(ServletConfig config) throws ServletException {
-		dataStore=new DataStore();
 	}
 	
 	/**
@@ -44,16 +42,27 @@ public class ValidateCourse extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	String courseID = request.getParameter("Validate");
+		String courseID = request.getParameter("Validate");
+		
+		if( courseID != null){
+			// 1 Create the factory of Entity Manager
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceJPAProject");
 	
-	if( courseID != null){
-		CourseBean oldCourse = dataStore.getCourse(courseID);
-		CourseBean newCourse = dataStore.getCourse(courseID);
-		newCourse.setValidated(true);
-		dataStore.aprooveCourse(courseID, oldCourse, newCourse);
-	}
+			// 2 Create the Entity Manager
+			EntityManager em = factory.createEntityManager();
 	
-	request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
+			// 3 Get one EntityTransaction and start it
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			
+			entities.Course course = new entities.Course();
+			course = em.createNamedQuery("Course.findByID", entities.Course.class).getSingleResult();
+			course.setValidated(1);
+			
+			em.close();
+			factory.close();
+		}
+		request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
 	}
 
 }

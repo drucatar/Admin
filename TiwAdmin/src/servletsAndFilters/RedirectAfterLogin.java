@@ -22,9 +22,6 @@ import entities.Admin;
 import entities.Course;
 import entities.Student;
 import entities.Teacher;
-import beansPackage.AdminBean;
-import beansPackage.DataStore;
-import beansPackage.UserBean;
 
 /**
  * Servlet implementation class RedirectAfterLogin
@@ -33,15 +30,12 @@ import beansPackage.UserBean;
 public class RedirectAfterLogin extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-       
-	private DataStore dataStore;
-	
+
     public RedirectAfterLogin() {
         super();
     }
     
 	public void init(ServletConfig config) throws ServletException {
-		dataStore=new DataStore();
 	}
 	
 	
@@ -65,21 +59,40 @@ public class RedirectAfterLogin extends HttpServlet {
 		tx.begin();
 
 		HttpSession session = request.getSession();
-		List<Integer> coursesIDs;
-		Admin administrator = em.createNamedQuery("Admin.findByName",entities.Admin.class).setParameter("NameAdmin",request.getParameter("nickname")).getSingleResult();
-		List<Course> validatedCourses = em.createNamedQuery("Course.findValidatedCourses", entities.Course.class).getResultList();
-		List<Course> nonValidatedCourses = em.createNamedQuery("Course.findNotValidatedCourses", entities.Course.class).getResultList();
-		List<Student> students = em.createNamedQuery("Student.findAll", entities.Student.class).getResultList();
-		List<Teacher> teachers = em.createNamedQuery("Teacher.findAll", entities.Teacher.class).getResultList();
+		Admin administrator = new entities.Admin();
+		List<Course> courses = new ArrayList<Course>();
+		List<Student> students = new ArrayList<Student>();
+		List<Teacher> teachers = new ArrayList<Teacher>();
 		
+		try{
+			administrator = em.createNamedQuery("Admin.findByName",entities.Admin.class).setParameter("NameAdmin",request.getParameter("nickname")).getSingleResult();
+		}catch(NoResultException e){
+			administrator = null;
+		}
+		
+		try{
+			courses = em.createNamedQuery("Course.findAll", entities.Course.class).getResultList();
+		}catch(NoResultException e){
+			courses = null;
+		}
+		
+		try{
+			students = em.createNamedQuery("Student.findAll", entities.Student.class).getResultList();
+		}catch(NoResultException e){
+			students = null;
+		}
+		
+		try{
+			teachers = em.createNamedQuery("Teacher.findAll", entities.Teacher.class).getResultList();
+		}catch(NoResultException e){
+			teachers = null;
+		}
 		
 		em.close();
 		factory.close();
 		
-		
-		session.setAttribute("validated_bean_session", administrator);
-		session.setAttribute("validatedCourses", validatedCourses);
-		session.setAttribute("nonValidatedCourses", nonValidatedCourses);
+		session.setAttribute("validated_session", administrator);
+		session.setAttribute("courses", courses);
 		session.setAttribute("students", students);
 		session.setAttribute("teachers", teachers);
 		

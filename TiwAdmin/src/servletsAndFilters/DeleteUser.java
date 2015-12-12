@@ -2,8 +2,14 @@ package servletsAndFilters;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,21 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beansPackage.CourseBean;
-import beansPackage.DataStore;
-import beansPackage.UserBean;
-
 /**
  * Servlet implementation class DeleteUser
  */
 @WebServlet("/DeleteUser")
 public class DeleteUser extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	private DataStore dataStore;
 	
+	private static final long serialVersionUID = 1L;
+
 	public void init(ServletConfig config) throws ServletException {
-		dataStore=new DataStore();
 	}
 	
     public DeleteUser() {
@@ -46,20 +46,68 @@ public class DeleteUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int diferentiator = Integer.parseInt(request.getParameter("user_type"));
 		String userID = request.getParameter("DeleteUser");
 		
-		if( userID != null)
+		// 1 Create the factory of Entity Manager
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceJPAProject");
+
+		// 2 Create the Entity Manager
+		EntityManager em = factory.createEntityManager();
+
+		// 3 Get one EntityTransaction and start it
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		
+		if( diferentiator == 0 && userID != null)
 		{
-			System.out.println("[* INSIDE USER IF *]");
-			UserBean course = dataStore.getInfo(userID);
-			dataStore.deleteUser(userID , course);
+			em.createNamedQuery("Student.Delete").setParameter("idStudent", userID);
+			em.createNamedQuery("Studentcourse.Delete").setParameter("idStudent", userID);
+			
 			HttpSession session = request.getSession();
-			session.removeAttribute("users");
-			List<Object> users = dataStore.getUsers();
-			session.setAttribute("users", users);
+			session.removeAttribute("students");
+			List<entities.Student> students = new ArrayList<entities.Student>();
+			
+			try{
+				students = em.createNamedQuery("Student.findAll", entities.Student.class).getResultList();
+			}catch(NoResultException e){
+				students = null;
+			}
+			session.setAttribute("students", students);
+		
+		}else if(diferentiator == 1 && userID != null)
+		{
+			em.createNamedQuery("Studentcourse.DeleteByTeacherID").setParameter("idTeacher", userID);
+			em.createNamedQuery("Teacher.Delete").setParameter("idTeacher", userID);
+			em.createNamedQuery("Teachercourse.DeleteByTeacherID").setParameter("idTeacher", userID);
+			
+			HttpSession session = request.getSession();
+			session.removeAttribute("teachers");
+			List<entities.Teacher> teachers = new ArrayList<entities.Teacher>();
+			
+			try{
+				teachers = em.createNamedQuery("Teachers.findAll", entities.Teacher.class).getResultList();
+			}catch(NoResultException e){
+				teachers = null;
+			}
+			session.setAttribute("teachers", teachers);
+			
+			session.removeAttribute("courses");
+			
+			List<entities.Course> courses = new ArrayList<entities.Course>();
+			
+			try{
+				courses = em.createNamedQuery("Course.findAll", entities.Course.class).getResultList();
+			}catch(NoResultException e){
+				courses = null;
+			}
+				
+			session.setAttribute("courses", courses);
 		}
 		
-		
+		em.close();
+		factory.close();
+			
 		request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
 	}
 

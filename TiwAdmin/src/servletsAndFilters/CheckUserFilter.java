@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,8 +18,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Admin;
-import beansPackage.AdminBean;
-import beansPackage.DataStore;
 
 /**
  * Servlet Filter implementation class CheckUserFilter
@@ -26,12 +25,9 @@ import beansPackage.DataStore;
 @WebFilter(filterName = "CheckUserFilter", urlPatterns={"/RedirectAfterLogin"})
 public class CheckUserFilter implements Filter {
 
-	private DataStore dataStore;
-	
     public CheckUserFilter() {}
 
     public void init(FilterConfig fConfig) throws ServletException {
-		dataStore=new DataStore();
 	}
 
 	/**
@@ -54,15 +50,22 @@ public class CheckUserFilter implements Filter {
 
 				// 3 Get one EntityTransaction and start it
 		EntityTransaction tx = em.getTransaction();
+		
+		Admin administrator = new entities.Admin();
 		tx.begin();
+		
 		try{
-		Admin administrator = em.createNamedQuery("Admin.findByName",entities.Admin.class).setParameter("NameAdmin",request.getParameter("username")).getSingleResult();
+			administrator = em.createNamedQuery("Admin.findByName",entities.Admin.class).setParameter("NameAdmin",request.getParameter("username")).getSingleResult();
 		}
-		catch()
-		/*If the bean is "null" it means that the nickname (primary key) was not found in our "DataBase"
-		 * and the user is directly incorrect. Otherwise the password associated to the user is checked.*/
+		catch(NoResultException e){
+			administrator = null;
+		}
+		
+		tx.commit();
+		em.close();
+		
 		if(administrator != null)
-			if(bean.getPassword().equals(request.getParameter("password")))
+			if(administrator.getPasswordAdmin().equals(request.getParameter("password")))
 				chain.doFilter(request, response);
 			else
 				((HttpServletResponse) response).sendRedirect("IncorrectPassword.jsp");

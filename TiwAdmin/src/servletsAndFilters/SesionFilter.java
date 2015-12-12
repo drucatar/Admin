@@ -42,11 +42,10 @@ public class SesionFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
-		if(session.getAttribute("validated_bean_session") == null)
+		if(session.getAttribute("validated_session") == null)
 			request.getRequestDispatcher("AccessPage.jsp").forward(request, response);
 		else
 			request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
-
 	}
 
 	/**

@@ -4,6 +4,10 @@ package servletsAndFilters;
 import java.io.IOException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,20 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beansPackage.CourseBean;
-import beansPackage.DataStore;
-
 /**
  * Servlet implementation class DeleteCourse
  */
 @WebServlet("/DeleteCourse")
 public class DeleteCourse extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
-	private DataStore dataStore;
 	
 	public void init(ServletConfig config) throws ServletException {
-		dataStore=new DataStore();
 	}
 	
     public DeleteCourse() {
@@ -44,19 +42,37 @@ public class DeleteCourse extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String courseID = request.getParameter("Delete");
 		
 		if( courseID != null)
 		{
-			CourseBean course = dataStore.getCourse(courseID);
-			dataStore.deleteCourse(courseID , course);
+			// 1 Create the factory of Entity Manager
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceJPAProject");
+
+			// 2 Create the Entity Manager
+			EntityManager em = factory.createEntityManager();
+
+			// 3 Get one EntityTransaction and start it
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			
+			em.createNamedQuery("Course.deleteByID").setParameter("courseID", courseID);
+			em.createNamedQuery("Studentcourse.DeleteByCourseID").setParameter("courseID", courseID);
+			em.createNamedQuery("Teachercourse.deleteByCourseID").setParameter("courseID", courseID);
+			
 			HttpSession session = request.getSession();
 			session.removeAttribute("courses");
-			List<Object> courses = dataStore.getCourses();
+			
+			List<entities.Course> courses = em.createNamedQuery("Course.findAll", entities.Course.class).getResultList();
+			session.setAttribute("courses", courses);
+			
+			em.close();
+			factory.close();
+			
 			session.setAttribute("courses", courses);
 		}
-		
-		
+	
 		request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
 	}
 
