@@ -2,11 +2,13 @@ package servletsAndFilters;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -64,13 +66,17 @@ public class DeleteCourse extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("courses");
 			
-			List<entities.Course> courses = em.createNamedQuery("Course.findAll", entities.Course.class).getResultList();
+			List<entities.Course> courses = new ArrayList<entities.Course>();
+			
+			try{
+				courses = em.createNamedQuery("Course.findAll", entities.Course.class).getResultList();
+			}catch(NoResultException e){
+				courses = null;
+			}
 			session.setAttribute("courses", courses);
 			
 			em.close();
 			factory.close();
-			
-			session.setAttribute("courses", courses);
 		}
 	
 		request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);

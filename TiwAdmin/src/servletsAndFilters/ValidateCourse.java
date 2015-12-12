@@ -2,10 +2,13 @@ package servletsAndFilters;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ValidateCourse
@@ -45,6 +49,8 @@ public class ValidateCourse extends HttpServlet {
 		String courseID = request.getParameter("Validate");
 		
 		if( courseID != null){
+			
+			System.out.println("[*] The id of the course is: " + courseID + " [*]");
 			// 1 Create the factory of Entity Manager
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceJPAProject");
 	
@@ -55,10 +61,21 @@ public class ValidateCourse extends HttpServlet {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			
-			entities.Course course = new entities.Course();
-			course = em.createNamedQuery("Course.findByID", entities.Course.class).getSingleResult();
-			course.setValidated(1);
+			em.createNamedQuery("Course.validate", entities.Course.class).setParameter("courseID",Integer.parseInt(courseID)).executeUpdate();			
 			
+			HttpSession session = request.getSession();
+			session.removeAttribute("courses");
+			
+			List<entities.Course> courses = new ArrayList<entities.Course>();
+			
+			try{
+				courses = em.createNamedQuery("Course.findAll", entities.Course.class).getResultList();
+			}catch(NoResultException e){
+				courses = null;
+			}			
+			session.setAttribute("courses", courses);
+			
+			tx.commit();
 			em.close();
 			factory.close();
 		}

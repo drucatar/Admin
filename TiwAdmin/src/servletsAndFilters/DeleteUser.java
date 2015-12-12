@@ -46,7 +46,7 @@ public class DeleteUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int diferentiator = Integer.parseInt(request.getParameter("user_type"));
+		int diferentiator = Integer.parseInt(request.getParameter("userType"));
 		String userID = request.getParameter("DeleteUser");
 		
 		// 1 Create the factory of Entity Manager
