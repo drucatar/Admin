@@ -193,7 +193,7 @@
                                	<td>Teacher</td>
                                 <td class="delete_user">
                                      <form action="DeleteUser" method = "post">
-										<input type="hidden" name ="DeleteUser" value="<%=teacher.getNickname()%>">
+										<input type="hidden" name ="DeleteUser" value="<%=teacher.getIdTeacher()%>">
 										<input type="hidden" name ="UserType" value="1">                                       
                                     	<input class="delete_user_button" type="submit" value="Delete">
                                     </form>
@@ -211,7 +211,7 @@
                                	<td>Student</td>
                                 <td class="delete_user">
                                      <form action="DeleteUser" method = "post">
-										<input type="hidden" name ="DeleteUser" value="<%=student.getNickname()%>">
+										<input type="hidden" name ="DeleteUser" value="<%=student.getIdStudent()%>">
 										<input type="hidden" name ="UserType" value="0">                                  
                                     	<input class="delete_user_button" type="submit" value="Delete">
                                     </form>

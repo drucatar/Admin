@@ -46,8 +46,10 @@ public class DeleteUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int diferentiator = Integer.parseInt(request.getParameter("userType"));
+		int diferentiator = Integer.parseInt(request.getParameter("UserType"));
 		String userID = request.getParameter("DeleteUser");
+		
+		System.out.println("[*] The id is: " + userID + " [*]");
 		
 		// 1 Create the factory of Entity Manager
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceJPAProject");
@@ -61,8 +63,15 @@ public class DeleteUser extends HttpServlet {
 		
 		if( diferentiator == 0 && userID != null)
 		{
-			em.createNamedQuery("Student.Delete").setParameter("idStudent", userID);
-			em.createNamedQuery("Studentcourse.Delete").setParameter("idStudent", userID);
+			entities.Student student = new entities.Student();
+			
+			try{
+				student = em.createNamedQuery("Student.findById", entities.Student.class).setParameter("studentID", Integer.parseInt(userID)).getSingleResult();
+			}catch(NoResultException e){
+				student = null;
+			}
+			em.createNamedQuery("Student.DeleteById").setParameter("studentID", Integer.parseInt(userID)).executeUpdate();
+			em.createNamedQuery("Studentcourse.deleteByStudentNickname").setParameter("nickname", student.getNickname()).executeUpdate();
 			
 			HttpSession session = request.getSession();
 			session.removeAttribute("students");
@@ -105,6 +114,7 @@ public class DeleteUser extends HttpServlet {
 			session.setAttribute("courses", courses);
 		}
 		
+		tx.commit();
 		em.close();
 		factory.close();
 			
