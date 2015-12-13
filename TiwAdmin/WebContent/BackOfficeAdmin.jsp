@@ -4,9 +4,11 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
-   <%session = request.getSession();
-   entities.Admin admin = (entities.Admin) session.getAttribute("validated_session");%>
+<%
+	session = request.getSession();
+	entities.Admin admin = (entities.Admin) session.getAttribute("validated_session");
+	double totalSystemMoney = 0;
+%>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -100,6 +102,13 @@
 
                 <!-- courses table -->
                 <h2 class="section_title">Courses</h2>
+                
+                <!-- create special offer -->
+                <p id="current_special_offer_text">Current Special Offer: <span>none</span></p>
+                <form id="special_offer_form" action="">
+                    <input required type="text" placeholder="Special Offer Code">
+                    <input id="create_special_offer_button" type="submit" value="Create">
+                </form>
 
                 <div class="admin_table_container">
 
@@ -112,6 +121,7 @@
                                 <th>Category</th>
                                 <th>Teacher</th>
                                 <th>Duration (hours)</th>
+                                <th>Price (€)</th>
                                 <th>Income (€)</th>
                                 <th>Validated</th>
                                 <th>Action</th>
@@ -129,6 +139,8 @@
                                 <td><a href="#!"><%=course.getProfessor()%></a></td>
                                 <td><%=course.getDuration()%></td>
                                 <td><%=course.getPrice()%></td>
+                                <td><%=course.getMoneyForSystem() %></td>
+                                <% totalSystemMoney += course.getMoneyForSystem(); %>
                                 <%if(course.getValidated() == 1){%>
                                 	<td> Yes</td>
                                 <%} else {%>
@@ -151,6 +163,19 @@
                 		}
                		%>
                         </tbody>
+                        
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td id="total_cell">Total</td>
+                                <td><%=totalSystemMoney %></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
