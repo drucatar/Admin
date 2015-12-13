@@ -59,9 +59,9 @@ public class DeleteCourse extends HttpServlet {
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
 			
-			em.createNamedQuery("Course.deleteByID").setParameter("courseID", courseID);
-			em.createNamedQuery("Studentcourse.DeleteByCourseID").setParameter("courseID", courseID);
-			em.createNamedQuery("Teachercourse.deleteByCourseID").setParameter("courseID", courseID);
+			em.createNamedQuery("Course.deleteByID").setParameter("courseID", Integer.parseInt(courseID)).executeUpdate();
+			em.createNamedQuery("Studentcourse.deleteByCourseID").setParameter("courseID", Integer.parseInt(courseID)).executeUpdate();
+			em.createNamedQuery("Teachercourse.deleteByCourseID").setParameter("courseID", Integer.parseInt(courseID)).executeUpdate();
 			
 			HttpSession session = request.getSession();
 			session.removeAttribute("courses");
@@ -75,6 +75,7 @@ public class DeleteCourse extends HttpServlet {
 			}
 			session.setAttribute("courses", courses);
 			
+			tx.commit();
 			em.close();
 			factory.close();
 		}
