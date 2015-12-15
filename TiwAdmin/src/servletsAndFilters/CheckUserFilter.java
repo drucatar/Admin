@@ -22,7 +22,7 @@ import entities.Admin;
 /**
  * Servlet Filter implementation class CheckUserFilter
  */
-@WebFilter(filterName = "CheckUserFilter", urlPatterns={"/unadoblecheeseburguerconpatatasdeluxe"})
+@WebFilter(filterName = "CheckUserFilter", urlPatterns={"/login"})
 public class CheckUserFilter implements Filter {
 
     public CheckUserFilter() {}
