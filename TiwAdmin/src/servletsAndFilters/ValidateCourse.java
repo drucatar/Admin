@@ -10,47 +10,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ValidateCourse
- */
-@WebServlet("/ValidateCourse")
-public class ValidateCourse extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
-	
-    public ValidateCourse() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	public void init(ServletConfig config) throws ServletException {
-	}
-	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+public class ValidateCourse implements RequestHandler {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	@Override
+	public String handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException 
+	{
 		String courseID = request.getParameter("Validate");
 		
-		if( courseID != null){
-			
-			System.out.println("[*] The id of the course is: " + courseID + " [*]");
+		if( courseID != null)
+		{
 			// 1 Create the factory of Entity Manager
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceJPAProject");
 	
@@ -79,7 +54,8 @@ public class ValidateCourse extends HttpServlet {
 			em.close();
 			factory.close();
 		}
-		request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
+		
+		return "BackOfficeAdmin.jsp";
 	}
 
 }

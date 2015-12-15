@@ -260,7 +260,7 @@
 
             <h1>Create special offer</h1>
 
-			<form id="special_offer_form" action="" method="POST">
+			<form id="special_offer_form" action="CreateSpecialOffer" method="POST">
 				<input required name="name" type="text" placeholder="Offer name">
                 <input required name="initDate" type="date" placeholder="Start date">
                 <input required name="expDate" type="date" placeholder="End date">

@@ -10,47 +10,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class DeleteUser
- */
-@WebServlet("/DeleteUser")
-public class DeleteUser extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
+public class DeleteUser implements RequestHandler {
 
-	public void init(ServletConfig config) throws ServletException {
-	}
-	
-    public DeleteUser() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	@Override
+	public String handleRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException 
+	{
 		int diferentiator = Integer.parseInt(request.getParameter("UserType"));
 		String userID = request.getParameter("DeleteUser");
-		
-		System.out.println("[*] The id is: " + userID + " [*]");
-		
+
 		// 1 Create the factory of Entity Manager
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceJPAProject");
 
@@ -117,8 +90,8 @@ public class DeleteUser extends HttpServlet {
 		tx.commit();
 		em.close();
 		factory.close();
-			
-		request.getRequestDispatcher("BackOfficeAdmin.jsp").forward(request, response);
+
+		return "BackOfficeAdmin.jsp";
 	}
 
 }
