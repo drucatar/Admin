@@ -104,11 +104,7 @@
                 <h2 class="section_title">Courses</h2>
                 
                 <!-- create special offer -->
-                <p id="current_special_offer_text">Current Special Offer: <span>none</span></p>
-                <form id="special_offer_form" action="">
-                    <input required type="text" placeholder="Special Offer Code">
-                    <input id="create_special_offer_button" type="submit" value="Create">
-                </form>
+                <a id="create_special_offer_button" href="#!">Create special offer</a>
 
                 <div class="admin_table_container">
 
@@ -169,9 +165,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td id="total_cell">Total</td>
-                                <td><%=totalSystemMoney %></td>
                                 <td></td>
+                                <td id="total_cell">Total</td>
+                                <td>SUM</td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -214,7 +210,7 @@
                          		for (entities.Teacher teacher:teachers){
                      		 %>
                             <tr>
-                                <td><a href="#!"><%=teacher.getNameTeacher()%></a></td>
+                                <td><a href="#!"><%=teacher.getNickname()%></a></td>
                                	<td>Teacher</td>
                                 <td class="delete_user">
                                      <form action="DeleteUser" method = "post">
@@ -232,7 +228,7 @@
                          		for (entities.Student student:students){
                      		 %>
                             <tr>
-                                <td><a href="#!"><%=student.getNameStudent()%></a></td>
+                                <td><a href="#!"><%=student.getNickname()%></a></td>
                                	<td>Student</td>
                                 <td class="delete_user">
                                      <form action="DeleteUser" method = "post">
@@ -252,11 +248,36 @@
 
             </section>
         </div>
-
-
-
-
+        
+        
+        
+        
         <!-- ================================================== -->
+        <!-- special offer window -->
+        <!-- ================================================== -->
+        <div id="back_office_dark_foreground"></div>
+        <div id="special_offer_window">
+
+            <h1>Create special offer</h1>
+
+			<form id="special_offer_form" action="" method="POST">
+				<input required name="name" type="text" placeholder="Offer name">
+                <input required name="initDate" type="date" placeholder="Start date">
+                <input required name="expDate" type="date" placeholder="End date">
+                <input required name="quantity" type="number" min="1" max="30" placeholder="Discount percentage">
+                <textarea name="description" rows="8" cols="40" maxlength="500"></textarea>
+
+                <div class="form_buttons_container">
+                    <input id="accept_create_special_offer_button" type="submit" value="Create">
+                    <a id="cancel_create_special_offer_button" href="#!">Cancel</a>
+                </div>
+			</form>
+        </div>
+
+
+
+
+	<!-- ================================================== -->
         <!-- footer -->
         <!-- ================================================== -->
         <footer>
@@ -272,6 +293,7 @@
         <!-- menu -->
         <script src="js/nav_menu/search_input.js"></script>
         <script src="js/nav_menu/menu.js"></script>
+        <script src="js/back_office/special_offer_window.js"></script>
 
         <!-- typejs -->
         <style>
@@ -287,6 +309,16 @@
                 font-size: 2vw;
                 max-font-size: 30px;
                 min-font-size: 25px;
+            }
+            
+            .delete_course_button,
+            .delete_user_button,
+            .validate_course_button,
+            #accept_create_special_offer_button,
+            #cancel_create_special_offer_button {
+                font-size: 1.2vw;
+                max-font-size: 16px;
+                min-font-size: 14px;
             }
 
         </style>
