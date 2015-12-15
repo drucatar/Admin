@@ -262,8 +262,8 @@
 
 			<form id="special_offer_form" action="CreateSpecialOffer" method="POST">
 				<input required name="name" type="text" placeholder="Offer name">
-                <input required name="initDate" type="date" placeholder="Start date">
-                <input required name="expDate" type="date" placeholder="End date">
+                <input required name="initialDate" type="text" placeholder="Start date">
+                <input required name="expDate" type="text" placeholder="End date">
                 <input required name="quantity" type="number" min="1" max="30" placeholder="Discount percentage">
                 <textarea name="description" rows="8" cols="40" maxlength="500"></textarea>
 
