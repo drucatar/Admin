@@ -4,4 +4,21 @@
   <welcome-file-list>
     <welcome-file>AccessPage.jsp</welcome-file>
   </welcome-file-list>
+  
+<servlet>
+    <display-name>ControllerServlet</display-name>
+    <servlet-name>ControllerServlet</servlet-name>
+    <servlet-class>servletsAndFilters.ControllerServlet</servlet-class>
+    <load-on-startup>100</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControllerServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+    <url-pattern>/DeleteCourse</url-pattern>
+    <url-pattern>/ValidateCourse</url-pattern>
+    <url-pattern>/LogOut</url-pattern>
+    <url-pattern>/CreateSpecialOffer</url-pattern>
+    <url-pattern>/DeleteUser</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

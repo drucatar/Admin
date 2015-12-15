@@ -60,7 +60,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
             <h1>Login</h1>
 
-            <form autocomplete="off" id="login_form" action="RedirectAfterLogin" method = "post">
+            <form autocomplete="off" id="login_form" action="login" method = "post">
 
                 <div class="home_form_window_input_container">
 

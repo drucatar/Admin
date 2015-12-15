@@ -18,27 +18,29 @@ public class ControllerServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;  
     // Hash table of RequestHandler instances, keyed by request URL
- 	private Map handlerHash = new HashMap();
+ 	private Map<String, Object> handlerHash = new HashMap<String, Object>();
 
  	
     public ControllerServlet() {
         super();
 		// This will read mapping definitions and populate handlerHash
-		handlerHash.put("/AccessPage.html",
+		handlerHash.put("/login",
 				new servletsAndFilters.RedirectAfterLogin());
-		handlerHash.put("/BackOfficeAdmin.html",
+		handlerHash.put("/CreateSpecialOffer",
 				new servletsAndFilters.CreateSpecialOffer());
-		handlerHash.put("/BackOfficeAdmin.html",
+		handlerHash.put("/DeleteCourse",
 				new servletsAndFilters.DeleteCourse());
-		handlerHash.put("/BackOfficeAdmin.html",
+		handlerHash.put("/ValidateCourse",
 				new servletsAndFilters.ValidateCourse());
-		handlerHash.put("/BackOfficeAdmin.html",
+		handlerHash.put("/LogOut",
 				new servletsAndFilters.LogOut());
+		handlerHash.put("/DeleteUser", 
+				new servletsAndFilters.DeleteUser());
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
