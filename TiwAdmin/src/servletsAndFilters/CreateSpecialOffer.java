@@ -44,13 +44,12 @@ public class CreateSpecialOffer extends HttpServlet {
 		// TODO Auto-generated method stub
 		double quantity = Double.parseDouble(request.getParameter("quantity"));
 		Date initDate = Date.valueOf(request.getParameter("initialDate"));
-		Date expDate = Date.valueOf(request.getParameter("initialDate"));
+		Date expDate = Date.valueOf(request.getParameter("expDate"));
 		/*
 		 * String name = request.getParameter("name");
 		 * String description = request.getParameter("description");
 		*/
-		
-		
+				
 		if(quantity != 0 && initDate != null && expDate != null)
 		{
 			entities.Specialoffer newOffer = new entities.Specialoffer();
@@ -87,9 +86,9 @@ public class CreateSpecialOffer extends HttpServlet {
 			// 3 Get one EntityTransaction and start it
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
-			
+
 			em.persist(newOffer);
-			
+	
 			// 4 Commmit the transaction
 			tx.commit();
 			em.flush();
