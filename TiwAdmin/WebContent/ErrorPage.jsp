@@ -21,7 +21,9 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     </head>
 
     <body>
-
+  <form action="javascript:history.go(-1)">
+      <button style="color:green;width:10%;margin-top:1%;margin-left:1%" type="submit"><font size="6">Go back</font></button>
+  </form>
         <div class="main_wrapper error_page_wrapper">
 
             <div id="error_page_container">
