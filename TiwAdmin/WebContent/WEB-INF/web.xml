@@ -18,5 +18,6 @@
     <url-pattern>/LogOut</url-pattern>
     <url-pattern>/CreateSpecialOffer</url-pattern>
     <url-pattern>/DeleteUser</url-pattern>
+    <url-pattern>/highlight</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.time.Year;
 import java.util.Calendar;
 
-import javafx.scene.chart.PieChart.Data;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -14,8 +12,6 @@ import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.eclipse.persistence.internal.databaseaccess.DatabaseCall;
 
 public class CreateSpecialOffer implements RequestHandler {
 
