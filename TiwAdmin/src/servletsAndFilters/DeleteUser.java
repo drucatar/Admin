@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.Course;
+import entities.Teacher;
+
 public class DeleteUser implements RequestHandler {
 
 	@Override
@@ -43,6 +46,7 @@ public class DeleteUser implements RequestHandler {
 			}catch(NoResultException e){
 				student = null;
 			}
+			
 			em.createNamedQuery("Student.DeleteById").setParameter("studentID", Integer.parseInt(userID)).executeUpdate();
 			em.createNamedQuery("Studentcourse.deleteByStudentNickname").setParameter("nickname", student.getNickname()).executeUpdate();
 			
@@ -59,9 +63,26 @@ public class DeleteUser implements RequestHandler {
 		
 		}else if(diferentiator == 1 && userID != null)
 		{
-			em.createNamedQuery("Studentcourse.DeleteByTeacherID").setParameter("idTeacher", userID);
-			em.createNamedQuery("Teacher.Delete").setParameter("idTeacher", userID);
-			em.createNamedQuery("Teachercourse.DeleteByTeacherID").setParameter("idTeacher", userID);
+			List<Integer> coursesIDs;
+			String nickname = null;
+			
+			try{
+				nickname = em.createNamedQuery("Teacher.findByID",String.class).setParameter("teacherID",userID).getSingleResult();
+				em.createNamedQuery("Teacher.deleteByID").setParameter("teacherID",userID).executeUpdate();
+			}catch(Exception e){}
+			try{
+				coursesIDs = em.createNamedQuery("Teachercourse.findByNickname",Integer.class).setParameter("nickname",nickname).getResultList();
+			}catch(NoResultException e){
+				coursesIDs = new ArrayList<Integer>();
+			}
+			try{
+				em.createNamedQuery("Teachercourse.deleteByTeacherNickname").setParameter("nickname",nickname).executeUpdate();
+			}catch(Exception e){}
+			for(int courseID:coursesIDs)
+				try{
+					em.createNamedQuery("Studentcourse.deleteByCourseID").setParameter("courseID",courseID).executeUpdate();
+					em.createNamedQuery("Course.deleteByID").setParameter("courseID",courseID).executeUpdate();
+				}catch(Exception e){}
 			
 			HttpSession session = request.getSession();
 			session.removeAttribute("teachers");
